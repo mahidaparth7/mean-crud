@@ -1,0 +1,46 @@
+<div class="row justify-content-between">
+  <div class="col-4">
+    <h3>Users</h3>
+  </div>
+  <div class="col-4">
+    <div *ngIf="message" class="alert alert-{{ message.type }}" role="alert">
+      {{ message.message }}
+    </div>
+  </div>
+  <div class="col-1">
+    <a routerLink="/create/new">Add</a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">
+            {{ column.title }}
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="users && users.length">
+        <tr *ngFor="let user of users">
+          <td *ngFor="let col of columns">{{ user[col.dataIndex] }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editDoc(user._id)">
+              Edit</button
+            ><button class="btn btn-danger" (click)="removeDoc(user._id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="!users || !users.length" class="text-center">
+        <tr>
+          <td attr.colspan="{{ columns.length + 1 }}">No Data Available</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
